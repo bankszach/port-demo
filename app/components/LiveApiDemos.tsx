@@ -498,6 +498,45 @@ export default function LiveApiDemos() {
     return `Keys: ${keys.slice(0, 3).join(", ")}`;
   }, [fastApiRootResult]);
 
+  const orchestratorSummary = useMemo(() => {
+    if (!configResult?.ok || !configResult.isJson || !configResult.data) {
+      return null;
+    }
+
+    const data = configResult.data as Record<string, unknown>;
+    const servers = Array.isArray(data.servers_configured)
+      ? (data.servers_configured as Array<unknown>)
+          .map((item) => String(item))
+          .filter(Boolean)
+      : [];
+
+    const environment =
+      typeof data.environment === "string" ? data.environment : undefined;
+    const release =
+      typeof data.release === "string"
+        ? data.release
+        : typeof data.version === "string"
+          ? data.version
+          : undefined;
+    const transport =
+      typeof data.transport === "string" ? data.transport : undefined;
+    const catalogProbe =
+      typeof data.catalog_probe === "string" ? data.catalog_probe : undefined;
+
+    const meta: Array<{ label: string; value: string }> = [];
+    if (environment) meta.push({ label: "Environment", value: environment });
+    if (transport) meta.push({ label: "Transport", value: transport });
+    if (release) meta.push({ label: "Release", value: release });
+    if (catalogProbe) meta.push({ label: "Catalog probe", value: catalogProbe });
+
+    return {
+      servers,
+      meta,
+      fetchedAt: configResult.fetchedAt,
+      status: configResult.status,
+    };
+  }, [configResult]);
+
   const statusItems = useMemo(() => {
     const items: Array<{
       tone: StatusTone;
@@ -624,6 +663,77 @@ export default function LiveApiDemos() {
         <div className="rounded-2xl border border-dashed border-white/15 bg-white/[0.02] p-6 text-sm text-slate-400">
           Successful health checks appear as soon as endpoints respond with the
           expected headers. Use Re-check below once infra is ready.
+        </div>
+      )}
+
+      {orchestratorSummary && (
+        <div className="space-y-4 rounded-2xl border border-white/10 bg-white/[0.045] p-6">
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            <div className="flex flex-col gap-1">
+              <span className="text-xs font-semibold uppercase tracking-[0.25em] text-slate-500">
+                Orchestrator
+              </span>
+              <h3 className="text-lg font-semibold text-slate-100">
+                Agent orchestrator · {ORCHESTRATOR_BASE.replace("https://", "")}
+              </h3>
+              <span className="text-xs text-slate-500">
+                Last config pull · {formatTimestamp(orchestratorSummary.fetchedAt)}
+              </span>
+            </div>
+            <span className="rounded-full border border-white/12 bg-white/10 px-3 py-1 font-mono text-xs text-slate-200">
+              HTTP {orchestratorSummary.status ?? "—"}
+            </span>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="flex flex-col gap-1">
+              <span className="text-xs font-semibold uppercase tracking-[0.25em] text-slate-500">
+                Base URL
+              </span>
+              <a
+                href={ORCHESTRATOR_BASE}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-sm text-sky-200 underline-offset-4 hover:underline"
+              >
+                {ORCHESTRATOR_BASE}
+              </a>
+            </div>
+            <div className="flex flex-col gap-2">
+              <span className="text-xs font-semibold uppercase tracking-[0.25em] text-slate-500">
+                Servers configured
+              </span>
+              {orchestratorSummary.servers.length > 0 ? (
+                <div className="flex flex-wrap gap-2">
+                  {orchestratorSummary.servers.map((server) => (
+                    <span
+                      key={server}
+                      className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold text-slate-200"
+                    >
+                      {server}
+                    </span>
+                  ))}
+                </div>
+              ) : (
+                <span className="text-sm text-slate-500">
+                  No servers registered.
+                </span>
+              )}
+            </div>
+          </div>
+
+          {orchestratorSummary.meta.length > 0 && (
+            <div className="grid gap-4 sm:grid-cols-3">
+              {orchestratorSummary.meta.map((item) => (
+                <div className="flex flex-col gap-1" key={item.label}>
+                  <span className="text-xs font-semibold uppercase tracking-[0.25em] text-slate-500">
+                    {item.label}
+                  </span>
+                  <span className="text-sm text-slate-200">{item.value}</span>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
 

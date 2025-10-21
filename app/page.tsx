@@ -1,3 +1,8 @@
+import ReactMarkdown from "react-markdown";
+
+import FacadeAgent from "@/components/FacadeAgent";
+import { COMPASS_MD } from "@/utils/facadeData";
+
 import LiveApiDemos from "./components/LiveApiDemos";
 
 type LiveProject = {
@@ -117,6 +122,34 @@ export default function Home() {
                 </span>
               </a>
             ))}
+          </div>
+        </section>
+
+        <section className="flex flex-col gap-6">
+          <div className="flex flex-col gap-2">
+            <h2 className="text-xl font-semibold text-slate-100 sm:text-2xl">
+              MCP facade run loop
+            </h2>
+            <p className="max-w-3xl text-sm text-slate-300 sm:text-base">
+              CYCLE-F stages wrapped in COMPASS-DRIVE guardrails. Runs the whole
+              loop with hard-wired data so you can narrate how it fits together.
+            </p>
+          </div>
+          <FacadeAgent />
+        </section>
+
+        <section className="flex flex-col gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-6 shadow-[0_10px_35px_-20px_rgba(15,37,72,0.75)]">
+          <div className="flex flex-col gap-2">
+            <h2 className="text-xl font-semibold text-slate-100 sm:text-2xl">
+              Architecture at a glance
+            </h2>
+            <p className="max-w-3xl text-sm text-slate-300 sm:text-base">
+              COMPASS-DRIVE surrounds the loop. Use this copy for quick walk
+              throughs with Chris or anyone curious about the hull.
+            </p>
+          </div>
+          <div className="prose prose-invert max-w-none text-sm">
+            <ReactMarkdown>{COMPASS_MD}</ReactMarkdown>
           </div>
         </section>
 
