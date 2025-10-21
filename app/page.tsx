@@ -33,12 +33,12 @@ const COMPASS_DRIVE_POINTS = [
 ];
 
 const CYCLE_F_STEPS = [
-  "Clarify — Define intent, stakeholders, constraints, SLOs, and the test plan.",
-  "Yield — Deterministic trigger (event, API, schedule); normalize inputs; assign run ID.",
-  "Context — Retrieve and enrich (RAG, search, features, policies) with freshness checks.",
-  "Learn — Reason, decide, or generate; choose tools; plan the pass.",
-  "Execute — Run tools and calls; orchestrate; transact safely; update state.",
-  "Feedback — Verify against SLOs; run evals; add HITL; log and distribute; loop.",
+  "Clarify - Define intent, stakeholders, constraints, SLOs, and the test plan.",
+  "Yield - Deterministic trigger (event, API, schedule); normalize inputs; assign run ID.",
+  "Context - Retrieve and enrich (RAG, search, features, policies) with freshness checks.",
+  "Learn - Reason, decide, or generate; choose tools; plan the pass.",
+  "Execute - Run tools and calls; orchestrate; transact safely; update state.",
+  "Feedback - Verify against SLOs; run evals; add HITL; log and distribute; loop.",
 ];
 
 const CYCLE_F_OUTPUTS = [
@@ -182,7 +182,7 @@ export default function Home() {
               Zach Banks AI Engineer
             </div>
             <h1 className="text-4xl font-semibold tracking-tight text-slate-100 sm:text-5xl">
-              COMPASS-DRIVE x Cycle-F — How We Ship Fast, Safe, and Measurable
+              COMPASS-DRIVE x Cycle-F - How We Ship Fast, Safe, and Measurable
             </h1>
           </div>
           <div className="grid gap-4 sm:grid-cols-3">

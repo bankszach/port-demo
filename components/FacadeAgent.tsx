@@ -27,16 +27,14 @@ type RunResponse = {
 };
 
 const INTRO_BULLETS = [
-  "Clarify -> Feedback in one click with optional OpenAI plan.",
-  "Stages stay deterministic so you can narrate COMPASS-DRIVE coverage.",
+  "Clarify -> Feedback in one click. OpenAI plan fills in when a key is present.",
+  "Deterministic scaffolding keeps each stage explainable inside COMPASS-DRIVE.",
 ];
 
 export default function FacadeAgent() {
   const [loading, setLoading] = useState(false);
   const [resp, setResp] = useState<RunResponse | null>(null);
-  const [task, setTask] = useState(
-    "Ship a 10-minute demo and one KPI win this week.",
-  );
+  const [task, setTask] = useState("Launch Zendesk-to-Slack triage pilot with KPI win.");
 
   async function run() {
     try {
@@ -71,14 +69,14 @@ export default function FacadeAgent() {
           className="w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-slate-100 focus:border-sky-400/40 focus:outline-none focus:ring-2 focus:ring-sky-400/30"
           value={task}
           onChange={(event) => setTask(event.target.value)}
-          placeholder="What should the facade ship?"
+          placeholder="Task headline for this pass"
         />
         <button
           onClick={run}
           disabled={loading}
           className="inline-flex items-center justify-center rounded-xl bg-sky-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-sky-400 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {loading ? "Running..." : "Run demo"}
+          {loading ? "Running pass..." : "Run facade pass"}
         </button>
       </div>
 
