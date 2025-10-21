@@ -26,6 +26,11 @@ type RunResponse = {
   kpis: Record<string, string>;
 };
 
+const INTRO_BULLETS = [
+  "Clarify -> Feedback in one click with optional OpenAI plan.",
+  "Stages stay deterministic so you can narrate COMPASS-DRIVE coverage.",
+];
+
 export default function FacadeAgent() {
   const [loading, setLoading] = useState(false);
   const [resp, setResp] = useState<RunResponse | null>(null);
@@ -50,13 +55,15 @@ export default function FacadeAgent() {
 
   return (
     <div className="space-y-4 rounded-2xl border border-white/10 bg-white/[0.04] p-6 shadow-[0_10px_35px_-20px_rgba(15,37,72,0.75)]">
-      <div className="space-y-2">
+      <div className="space-y-3">
         <h3 className="text-xl font-semibold text-slate-100">
           MCP Facade - CYCLE-F inside COMPASS-DRIVE
         </h3>
-        <p className="text-sm text-slate-300">
-          Run the loop end to end. Stages are hard-wired but make the workflow easy to narrate.
-        </p>
+        <ul className="list-disc space-y-1 pl-4 text-sm text-slate-300">
+          {INTRO_BULLETS.map((bullet) => (
+            <li key={bullet}>{bullet}</li>
+          ))}
+        </ul>
       </div>
 
       <div className="flex flex-col gap-3 sm:flex-row">
