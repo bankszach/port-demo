@@ -259,6 +259,7 @@ function ResponseCard({
 
 function CurlBlock({ label, command }: { label: string; command: string }) {
   const [copied, setCopied] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const handleCopy = useCallback(async () => {
     try {
@@ -271,7 +272,14 @@ function CurlBlock({ label, command }: { label: string; command: string }) {
   }, [command]);
 
   return (
-    <details className="rounded-lg border border-slate-200 bg-white/70 shadow-sm" defaultOpen>
+    <details
+      className="rounded-lg border border-slate-200 bg-white/70 shadow-sm"
+      open={isOpen}
+      onToggle={(event) => {
+        const target = event.currentTarget as HTMLDetailsElement;
+        setIsOpen(target.open);
+      }}
+    >
       <summary className="flex cursor-pointer items-center justify-between gap-4 rounded-t-lg bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-700">
         <span>{label}</span>
         <button
