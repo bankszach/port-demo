@@ -1,26 +1,47 @@
 import Image from "next/image";
 import LiveApiDemos from "./components/LiveApiDemos";
 
-const LIVE_PROJECTS = [
+type LiveProject = {
+  title: string;
+  href: string;
+  description: string;
+  shippedBlurb?: string;
+};
+
+const LIVE_PROJECTS: LiveProject[] = [
+  {
+    title: "Portfolio API Demo",
+    href: "https://port-demo-six.vercel.app/",
+    description:
+      "Production view of orchestrator health signals with read-only guarantees.",
+    shippedBlurb:
+      "Single-page demo wired to Cloud Run. Shows orchestrator config, browser CORS preflight, and live MCP root status. Catalog/invoke deliberately disabled until transport lands—see curl panel.",
+  },
   {
     title: "Labor Agent UI",
     href: "https://labor-agent-ui.vercel.app/",
-    description: "Next.js dashboard for orchestrated agents and MCP sessions.",
+    description:
+      "Streamlined dashboard for agent telemetry narratives and brand system demos.",
+    shippedBlurb:
+      "Frontend-only console with curated data; showcases UI/brand and agent telemetry patterns without backend provisioning.",
   },
   {
     title: "Banksorg.com",
     href: "https://www.banksorg.com/",
-    description: "Studio portfolio for banking UX explorations and pitch decks.",
+    description:
+      "Studio portfolio for banking UX explorations and pitch decks.",
   },
   {
     title: "GhostLark.com",
     href: "https://ghostlark.com/",
-    description: "Lightweight storytelling site powered by modern web primitives.",
+    description:
+      "Lightweight storytelling site powered by modern web primitives.",
   },
   {
-    title: "Design Benchmark (external)",
+    title: "Design Benchmark (not my build)",
     href: "https://www.kalidyne.com/",
-    description: "Reference experience used to compare motion and layout polish.",
+    description:
+      "Reference experience used to compare motion and layout polish.",
   },
 ];
 
@@ -76,9 +97,12 @@ export default function Home() {
 
         <section className="w-full max-w-5xl">
           <div className="mb-6 flex flex-col gap-2">
-            <h2 className="text-2xl font-semibold text-slate-900">Live Projects</h2>
+            <h2 className="text-2xl font-semibold text-slate-900">
+              Launch Surfaces
+            </h2>
             <p className="text-base text-slate-600">
-              Launch the front-end experiences that pair with the orchestrator demo.
+              Keep these links handy for interviews—each one is production ready
+              today.
             </p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
@@ -95,6 +119,11 @@ export default function Home() {
                     {project.title}
                   </h3>
                   <p className="text-sm text-slate-600">{project.description}</p>
+                  {project.shippedBlurb && (
+                    <p className="text-sm text-slate-500">
+                      {project.shippedBlurb}
+                    </p>
+                  )}
                 </div>
                 <span className="text-sm font-medium text-slate-700">
                   Open in new tab →
