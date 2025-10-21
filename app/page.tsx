@@ -55,7 +55,7 @@ export default function Home() {
       <main className="mx-auto flex w-full max-w-6xl flex-col gap-16 px-6 py-10 sm:px-10 sm:py-16">
         <section className="flex flex-col gap-8">
           <div className="inline-flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-slate-200/80">
-            Cognitive Design Group LLC
+            Zach Banks AI Engineer
           </div>
           <div className="flex flex-col gap-4">
             <h1 className="text-4xl font-semibold tracking-tight text-slate-100 sm:text-5xl">
@@ -156,7 +156,7 @@ export default function Home() {
         <LiveApiDemos />
 
         <footer className="flex flex-col gap-2 border-t border-white/5 pt-8 text-xs text-slate-500 sm:text-sm">
-          <span>© {new Date().getFullYear()} Cognitive Design Group LLC</span>
+          <span>© {new Date().getFullYear()} Zach Banks AI Engineer</span>
           <span className="text-slate-600">
             All live systems shown are read-only friendly and sanitized for
             demos.

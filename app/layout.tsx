@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Cognitive Design Group · Live Systems Portfolio",
+  title: "Zach Banks AI Engineer · Live Systems Portfolio",
   description:
     "Live operational view of production-ready demos, orchestrator health signals, and verified agent services.",
 };
